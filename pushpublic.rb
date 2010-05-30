@@ -40,7 +40,7 @@ get "/" do
     end
   end
   
-  redirect "/articles/#{newest_article}"
+  erb File.read "articles/#{newest_article}/article.erb"
 end
 
 #404 error
