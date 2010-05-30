@@ -5,11 +5,17 @@
     
     <title><%= @title %> - Mustardamus</title>
     
-    <link rel="stylesheet" type="text/css" media="screen" href="css/reset_960.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/reset_960.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+    
+    <% unless @stylesheets.nil? %>
+      <% @stylesheets.each do |stylesheet| %>
+        <link rel="stylesheet" type="text/css" media="screen" href="/articles/<%= params[:name] %>/<%= stylesheet %>.css" />
+      <% end %>
+    <% end %>
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
   </head>
   <body>
     <div class="container_12">
