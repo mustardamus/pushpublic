@@ -5,8 +5,8 @@ get "/css/main.css" do
 end
 
 #handle article erb content
-get "/articles/:name" do
-  article_dir = "articles/#{params[:name]}"
+get "/articles/:article" do
+  article_dir = "articles/#{params[:article]}"
   article_erb = "#{article_dir}/article.erb"
   
   if File.exist? article_erb
@@ -17,9 +17,15 @@ get "/articles/:name" do
 end
 
 #handle article stylesheet
-get "/articles/:name/:style.css" do
+get "/articles/:article/:stylesheet.css" do
   content_type "text/css", :charset => "utf-8"
-  less File.read "articles/#{params[:name]}/#{params[:style]}.less"
+  less File.read "articles/#{params[:article]}/#{params[:stylesheet]}.less"
+end
+
+#handle article javascript
+get "/articles/:article/:javascript.js" do
+  content_type "text/javascript", :charset => "utf-8"
+  File.read "articles/#{params[:article]}/#{params[:javascript]}.js"
 end
 
 #index
