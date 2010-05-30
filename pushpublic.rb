@@ -28,9 +28,19 @@ get "/articles/:article/:javascript.js" do
   File.read "articles/#{params[:article]}/#{params[:javascript]}.js"
 end
 
-#index
+#redirect to the newest article
 get "/" do
-  erb :index
+  entries = Dir.entries("articles")
+  newest_article = entries[2]
+  newest_time = File.open("articles/#{entries[2]}").ctime
+  
+  entries.each do |dir|
+    unless dir[0] == 46 #char 46 = .
+      newest_article = dir if newest_time < File.open("articles/#{dir}").ctime
+    end
+  end
+  
+  redirect "/articles/#{newest_article}"
 end
 
 #404 error
