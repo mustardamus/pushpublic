@@ -9,9 +9,7 @@ xml.rss :version => "2.0" do
       xml.item do
         xml.title article[:title]
         xml.link "http://mustardamus.com/articles/#{article[:url]}"
-        xml.description {
-          xml.cdata! Nokogiri::HTML(File.read("articles/#{article[:url]}/article.erb")).search("#content").to_s
-        }
+        xml.description { xml.cdata!("<a href='http://mustardamus.com/articles/#{article[:url]}'>Go to article &raquo;</a>") }
         xml.pubDate article[:created].rfc822
         xml.guid "http://mustardamus.com/articles/#{article[:url]}"
       end
