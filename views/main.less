@@ -1,22 +1,31 @@
-html { font-size: 16px; }
+html { font-size: 16px; padding-bottom: 70px; }
 body { font-size: 62.5%; font-family: Helvetica, Arial, sans-serif; background: white; color: #333; }
 
 
-a { text-decoration: none; }
+a { text-decoration: none; color: #E94322; }
 a:hover { text-decoration: underline; }
 
+h1 { font-size: 3.2em; line-height: 42px;
+  a { color: #111; }
+  a:hover { text-decoration: none; }
+  span { font-size: 0.8em; display: block; color: #aaa; }
+}
+h2 { font-size: 2.2em; margin: 20px 0; }
+h3 { font-size: 1.6em; margin: 12px 0; }
 
 .border-radius(@radius: 10px) { border-radius: @radius; -moz-border-radius: @radius; -webkit-border-radius: @radius; }
 .blockbg { text-indent: -30000px; display: block; }
 .text-shadow(@color: black) { text-shadow: 1px 1px 0 @color; }
 
-#navigation { background: #333; margin-bottom: 70px;
+
+#navigation { background: #333; margin-bottom: 70px; min-height: 100px;
   ul { position: relative; padding-left: 100px;
     li { float: left; margin: 40px 10px 40px 0;
       a { color: white; font-size: 2em; }
     }
   }
 }
+
 #navigation-logo { position: absolute; top: -30px; left: 0;
   a { display: block; width: 80px; height: 80px; background: #D0E017; .border-radius(40px); position: relative;
     span { .blockbg; background: url(../images/dude.png); width: 62px; height: 73px; position: absolute; top: 9px; left: 8px; }
@@ -28,4 +37,27 @@ a:hover { text-decoration: underline; }
 
 #navigation-rss { position: absolute; top: 0; right: 0;
   a { .blockbg; background: url(../images/rss.png); width: 26px; height: 26px; }
+}
+
+
+#meta { font-size: 1.6em; }
+#meta-date { color: #aaa; font-size: 1.2em; padding-bottom: 12px; }
+#meta-date-year { font-size: 0.6em; }
+#meta-comments { padding-bottom: 12px; }
+#meta-prev-article, #meta-next-article { padding-bottom: 3px; font-size: 0.8em;
+  a { color: #111; }
+}
+
+
+#heading { border-bottom: 2px solid #eee; padding-bottom: 35px; margin-bottom: 35px; }
+
+
+#content {
+  p { font-size: 1.4em; line-height: 18px; margin-bottom: 14px; }
+  ul, ol { font-size: 1.4em; line-height: 20px; color: #555; margin: 0 0 14px 40px; }
+  ul { list-style: circle; }
+  ol { list-style: decimal; }
+  img { border: 3px solid #eee; .border-radius(5px); }
+  
+  .gist { font-size: 1.2em; }
 }

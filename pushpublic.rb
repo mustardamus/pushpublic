@@ -9,11 +9,7 @@ get "/articles/:article" do
   article_dir = "articles/#{params[:article]}"
   article_erb = "#{article_dir}/article.erb"
   
-  if File.exist? article_erb
-    erb File.read "#{article_dir}/article.erb"
-  else
-    404
-  end
+  File.exist?(article_erb) == true ? erb(File.read(article_erb)) : 404
 end
 
 #handle article stylesheet
@@ -30,17 +26,8 @@ end
 
 #redirect to the newest article
 get "/" do
-  entries = Dir.entries("articles")
-  newest_article = entries[2]
-  newest_time = File.open("articles/#{entries[2]}").ctime
-  
-  entries.each do |dir|
-    unless dir[0] == 46 #char 46 = .
-      newest_article = dir if newest_time < File.open("articles/#{dir}").ctime
-    end
-  end
-  
-  erb File.read "articles/#{newest_article}/article.erb"
+  params[:article] = ARTICLES[0][:url]
+  erb File.read "articles/#{ARTICLES[0][:url]}/article.erb"
 end
 
 #404 error
