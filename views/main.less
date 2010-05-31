@@ -1,3 +1,31 @@
 html { font-size: 16px; }
 body { font-size: 62.5%; font-family: Helvetica, Arial, sans-serif; background: white; color: #333; }
 
+
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+
+.border-radius(@radius: 10px) { border-radius: @radius; -moz-border-radius: @radius; -webkit-border-radius: @radius; }
+.blockbg { text-indent: -30000px; display: block; }
+.text-shadow(@color: black) { text-shadow: 1px 1px 0 @color; }
+
+#navigation { background: #333; margin-bottom: 70px;
+  ul { position: relative; padding-left: 100px;
+    li { float: left; margin: 40px 10px 40px 0;
+      a { color: white; font-size: 2em; }
+    }
+  }
+}
+#navigation-logo { position: absolute; top: -30px; left: 0;
+  a { display: block; width: 80px; height: 80px; background: #D0E017; .border-radius(40px); position: relative;
+    span { .blockbg; background: url(../images/dude.png); width: 62px; height: 73px; position: absolute; top: 9px; left: 8px; }
+  }
+}
+
+#navigation-home a, #navigation-archive a, #navigation-elsewhere a { padding: 5px 20px; .border-radius(3px); text-decoration: none; .text-shadow; }
+#navigation-home a:hover, #navigation-archive a:hover, #navigation-elsewhere a:hover { background: #D0E017; color: #333; .text-shadow(#F5FF7F); }
+
+#navigation-rss { position: absolute; top: 0; right: 0;
+  a { .blockbg; background: url(../images/rss.png); width: 26px; height: 26px; }
+}
