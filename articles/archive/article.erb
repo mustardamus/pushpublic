@@ -1,0 +1,13 @@
+<% @title = "Archive" %>
+
+<div id="heading" class="grid_12">
+  <h1>Archive</h1>
+</div>
+
+<div id="content" class="grid_12">
+  <ul>
+    <% ARTICLES.each do |article| %>
+      <li><a href="/articles/<%= article[:url] %>"><%= article[:title] %></a> - <%= article[:created].strftime("%B %d %Y") %></li>
+    <% end %>
+  </ul>
+</div>
