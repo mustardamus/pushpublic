@@ -55,4 +55,104 @@
       Another good reason is the ability to turn your article into a live demo for CSS and JS experiments.
     </p>
   </div>
+  
+  
+  <h2 class="grid_12">Low level content management</h2>
+  <div class="grid_4">
+    <p>
+      To keep this "micro" I've choosen not to use any database nor any backend at all. Articles are written
+      in plain HTML wrapped by <a href="http://www.ensta.fr/~diam/ruby/online/ruby-doc-stdlib/libdoc/erb/rdoc/classes/ERB.html">ERB</a>
+      and stored as files in matching directories.
+    </p>
+    <p>
+      Once a visitor arrives a <code>/articles/*</code> route the <a href="http://www.sinatrarb.com/">Sinatra</a> app checks if a directory
+      named like the requested article URL exist. If so the file <code>article.erb</code> in the article directory will be rendered,
+      otherwise it raises a <code>404 Not Found</code> error and render the 404 page.
+    </p>
+  </div>
+  <div class="grid_8">
+    <script src="http://gist.github.com/420207.js?file=pushbublic.rb"></script>
+  </div>
+  
+  <h2 class="grid_12">Become a Chameleon</h2>
+  <div class="grid_4">
+    <p>
+      Since Ruby can be executed in the article itself we set some public variables. <code>@title</code> are just printed in the surrounding
+      <code>layout.erb</code>'s <code>&lt;/title&gt;</code> tag. <code>@stylesheets</code> and <code>@javascripts</code> are arrays with
+      filenames stored in the same article directory.
+    </p>
+    <p>
+      In the layout file we include any additional stylesheet and javascript file after the default ones.
+    </p>
+    <p>
+      Last thing to do is to serve the additional files properly. If a <code>*.css</code> is requested we tell the client we serve a
+      <code>text/css</code>. In reality we first compile the matching <code>*.less</code> file with <a href="http://lesscss.org/">LESS</a>.
+      This is just a personal choice, we could serve pure CSS too. But with LESS you have even more fun altering the Blog's design!
+    </p>
+    <p>
+      JavaScript's are served as they are. <a href="http://jquery.com/">jQuery</a> is already included by the surrounding
+      <code>layout.erb</code> and ready to roll.
+    </p>
+  </div>
+  <div class="grid_8">
+    <script src="http://gist.github.com/420233.js?file=article.erb"></script>
+    <script src="http://gist.github.com/420236.js?file=layout.erb"></script>
+    <script src="http://gist.github.com/420233.js?file=pushpublic.rb"></script>
+  </div>
+  
+  <h2 class="grid_12">Homepage == Latest Article</h2>
+  <div class="grid_4">
+    <p>
+      Just like on <a href="http://jasonsantamaria.com/">Mr. Santa Maria's Blog</a> we serve the latest article as homepage.
+    </p>
+    <p>
+      You could <a href="http://github.com/mustardamus/pushpublic/blob/7449d2ac63b6fdd86fcc02f46ee21c862a4ca783/pushpublic.rb#L32">get
+      the latest article via the creation time of the directory</a>. But I've choosen to maintain a array of articles by hand. We use
+      this list later on when generating the RSS feed.
+    </p>
+    <p>
+      When a visitor requests the root URL <code>/</code> we get the first hash from the articles array and render the article file.
+    </p>
+  </div>
+  <div class="grid_8">
+    <script src="http://gist.github.com/420382.js?file=articles.rb"></script>
+    <script src="http://gist.github.com/420382.js?file=pushpublic.rb"></script>
+  </div>
+  
+  <h2 class="grid_12">Provide a RSS feed, we are not in the 90s anymore</h2>
+  <div class="grid_4">
+    <p>
+      Nothing easier than that. We just use <a href="http://builder.rubyforge.org/">Builder</a> to generate the RSS. We loop through
+      every article from the <code>ARTICLES</code> array and create the feed items.
+    </p>
+    <p>
+      As seen in the <a href="http://sinatra-book.gittr.com/#rss_feed">Sinatra Book</a>.
+    </p>
+  </div>
+  <div class="grid_8">
+    <script src="http://gist.github.com/420393.js?file=pushbublic.rb"></script>
+    <script src="http://gist.github.com/420393.js?file=rss.builder"></script>
+  </div>
+  
+  <div class="grid_5 suffix_1">
+    <h2>Complete Code</h2>
+    <p id="github">
+      Check out the complete code working together at the <a href="http://github.com/mustardamus/pushpublic">Public GitHub Repository</a>.
+    </p>
+  </div>
+  <div class="grid_6">
+    <h2>But wait... How do you publish content?</h2>
+    <p>
+      Right now you can write and develop articles locally. Start the Sinatra app with <code>rackup config.ru</code> and your Blog
+      is available at <code>http://localhost:9292</code>.
+    </p>
+    <p>
+      To publish new articles you either want to upload them via FTP or pull the changes from a remote git repository and restart the
+      Sinatra app.
+    </p>
+    <p>
+      I'm working on a much better method publishing new stuff online hacking with
+      <a href="http://help.github.com/post-receive-hooks/">GitHub webhooks</a>. Stay tuned!
+    </p>
+  </div>
 </div>

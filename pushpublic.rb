@@ -4,9 +4,7 @@ get "/css/main.css" do
 end
 
 get "/articles/:article" do
-  article_dir = "articles/#{params[:article]}"
-  article_erb = "#{article_dir}/article.erb"
-  
+  article_erb = "articles/#{params[:article]}/article.erb"
   File.exist?(article_erb) == true ? erb(File.read(article_erb)) : 404
 end
 
