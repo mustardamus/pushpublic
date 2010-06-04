@@ -14,6 +14,11 @@ ul#terminal-output { margin: 0; width: 674px; height: 295px; overflow-y: scroll;
 
 #commands { position: absolute; top: 50px; left: -50px; text-align: left; overflow: hidden; width: 203px;
   ol { margin-left: 20px;
-    li { width: 800px; }
+    li { width: 800px; margin-bottom: 5px; font-size: 0.9em;
+      a { padding: 3px 10px; background: url(../../images/terminal.png) -110px -25px; border-radius: 5px; -moz-border-radius: 5px; -moz-border-radius: 5px; box-shadow: 1px 1px #9a9a9a; -moz-box-shadow: 1px 1px #9a9a9a; -webkit-box-shadow: 1px 1px #9a9a9a; color: #333; text-shadow: 1px 1px #eee; }
+      a:hover { background-position: -110px -60px; text-decoration: none; color: white; text-shadow: none; }
+      a.current { background-position: -85px -26px; padding-left: 26px; }
+      a.current:hover { color: #333; text-shadow: 1px 1px #eee; }
+    }
   }
 }

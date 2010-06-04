@@ -2,9 +2,16 @@ $(document).ready(function() {
   var commands = $('<ol/>').appendTo('#commands');
   var terminalOutput = $('#terminal-output');
   
+  
+  $('<span/>', {
+    text: '~ $ ',
+    'class': 'cream' //$$ bill ya'll
+  }).prependTo($('.command', terminalOutput));
+  
+  
   $('li.command', terminalOutput).each(function(index) {
     var command = $(this).html();
-    var command = command.substr(command.indexOf('</span>') + 8);
+    var command = command.substr(command.indexOf('</span>') + 7);
     
     $('<li/>', {
       html: $('<a/>', {
@@ -14,10 +21,15 @@ $(document).ready(function() {
           'commandTop': $('li.command:eq('+index+')', terminalOutput).offset().top - 374
         },
         click: function() {
+          var el = $(this);
+          
           terminalOutput.animate({
-            scrollTop: $(this).data('commandTop')
+            scrollTop: el.data('commandTop')
           }, 200);
 
+          el.parent().parent().children('li').children('a').removeClass();
+          el.addClass('current');
+          
           return false;
         }
       })
@@ -30,12 +42,9 @@ $(document).ready(function() {
     $('li.output', terminalOutput).slideUp(300);
   }, function() {
     $(this).text('Hide Output');
-    $('li.output', terminalOutput).slideDown(300);
+    $('li.output', terminalOutput).slideDown(300, function() {
+      $('.current', commands).click();
+    });
+    
   });
-  
-  
-  $('<span/>', {
-    text: '~ $ ',
-    'class': 'cream' //$$ bill ya'll
-  }).prependTo($('.command', terminalOutput));
 });
