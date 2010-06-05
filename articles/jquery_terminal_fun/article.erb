@@ -1,6 +1,6 @@
 <% @title = "jQuery Terminal Fun" %>
 <% @stylesheets = ["article"] %>
-<% @javascripts = ["terminal"] %>
+<% @javascripts = ["jquery.backgroundPosition", "terminal"] %>
 
 <div id="heading">
   <div class="grid_10">
@@ -36,42 +36,43 @@
       <div id="terminal-top">Even some text?</div>
 
       <ul id="terminal-output">
-        <li class="command">help</li>
-        <li class="output"><pre>Help is here!</pre></li>
-        
-        <li class="command">git add remote whatever und was weis ich man einfach land line brechend</li>
-        <li class="output"><pre>.
-..
-/uh
-/ah
-/system</pre>
-</li><li class="command">ls - a</li>
-<li class="output"><pre>.
-..
-/uh
-/ah
-/system</pre>
-</li><li class="command">ls - a</li>
-<li class="output"><pre>.
-..
-/uh
-/ah
-/system</pre>
-</li><li class="command">ls - a</li>
-<li class="output"><pre>.
-..
-/uh
-/ah
-/system</pre>
-</li><li class="command">ls - a</li>
-<li class="output"><pre>.
-..
-/uh
-/ah
-/system</pre>
-</li>
+        <li class="command">git add .</li>
 
-        <li class="command">exit</li>
+        <li class="command">git commit -m "$$ bill ya'll" fsfgfgsd dfsg dfs dfgs dfg</li>
+        <li class="output"><pre>[master 8a4199f] 2992 bill ya'll
+5 files changed, 141 insertions(+), 0 deletions(-)
+create mode 100644 articles/jquery_terminal_fun/article.erb
+create mode 100644 articles/jquery_terminal_fun/article.less
+create mode 100644 articles/jquery_terminal_fun/terminal.js
+create mode 100644 public/images/terminal.png</pre>
+        </li>
+        
+        <li class="command">irb</li>
+        <li class="output"><pre>>> 20.times do
+?> puts "break"
+>> end
+break
+break
+break
+break
+break
+break
+break
+break
+break
+break
+break
+break
+break
+break
+break
+break
+break
+break
+break
+break
+=> 20
+>> exit</pre></li>
       </ul>
 
       <div id="terminal-bottom"></div>

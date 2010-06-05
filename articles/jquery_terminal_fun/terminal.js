@@ -36,6 +36,8 @@ $(document).ready(function() {
     }).appendTo(commands);
   });
   
+  $('a:first', commands).addClass('current');
+  
   
   $('#toggleoutput').toggle(function() {
     $(this).text('Show Output');
@@ -45,6 +47,5 @@ $(document).ready(function() {
     $('li.output', terminalOutput).slideDown(300, function() {
       $('.current', commands).click();
     });
-    
   });
 });
