@@ -1,0 +1,223 @@
+<% @title = "Forwarding E-Mails with Postfix" %>
+<% @stylesheets = ["terminal"] %>
+<% @javascripts = ["terminal"] %>
+
+<div id="heading">
+  <div class="grid_10">
+    <h1><a href="/articles/forwarding_emails_with_postfix">
+      Forwarding E-Mails with Postfix
+      <span>And just that. On a MediaTemple (ve) Ubuntu Server.</span>
+    </a></h1>
+  </div>
+  <div class="grid_2">
+    <ul id="meta">
+      <li id="meta-date">
+        <span id="meta-date-month">June</span>
+        <span id="meta-date-day">03</span>
+        <span id="meta-date-year">2010</span>
+      </li>
+      
+      <li id="meta-prev-article"><a href="/articles/create_a_micro_chameleon_blog_with_sinatra">&laquo; Create a Micro Chameleon Blog with Sinatra</a></li>
+    </ul>
+  </div>
+  <div class="clear"></div>
+</div>
+
+
+<div id="content">
+  <div class="grid_12">
+    <div id="commands">
+      <h3>Commands</h3>
+      
+      <a href="#toggle-output" id="toggleoutput">Hide Output</a>
+    </div>
+    
+    <div id="terminal">
+      <div id="terminal-top">Forwarding E-Mails with Postfix</div>
+
+      <ul id="terminal-output">
+        <li class="command">apt-get update</li>
+        <li class="output"><pre>Get:1 http://archive.ubuntu.com karmic Release.gpg [189B]
+Get:2 http://archive.ubuntu.com karmic-updates Release.gpg [189B]
+Get:3 http://archive.ubuntu.com karmic-security Release.gpg [189B]
+Get:4 http://archive.ubuntu.com karmic Release [65.9kB]
+Get:5 http://archive.ubuntu.com karmic-updates Release [44.1kB]
+Get:6 http://archive.ubuntu.com karmic-security Release [44.1kB]
+Get:7 http://archive.ubuntu.com karmic/main Packages [1353kB]
+Get:8 http://archive.ubuntu.com karmic/restricted Packages [7969B]
+Get:9 http://archive.ubuntu.com karmic/universe Packages [5108kB]
+Get:10 http://archive.ubuntu.com karmic-updates/main Packages [223kB]
+Get:11 http://archive.ubuntu.com karmic-updates/restricted Packages [14B]
+Get:12 http://archive.ubuntu.com karmic-updates/universe Packages [133kB]
+Get:13 http://archive.ubuntu.com karmic-security/main Packages [102kB]
+Get:14 http://archive.ubuntu.com karmic-security/restricted Packages [14B]
+Get:15 http://archive.ubuntu.com karmic-security/universe Packages [55.1kB]
+Fetched 7136kB in 4s (1724kB/s)                              
+Reading package lists... Done</pre>
+        </li>
+        
+        <li class="command">apt-get upgrade</li>
+        <li class="output"><pre>Reading package lists... Done
+Building dependency tree... Done
+The following packages will be upgraded:
+  libc-bin libc6 libgssapi-krb5-2 libk5crypto3 libkrb5-3 libkrb5support0 tzdata
+7 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 6292kB of archives.
+After this operation, 16.4kB of additional disk space will be used.
+Do you want to continue [Y/n]? Y
+Get:1 http://archive.ubuntu.com karmic-updates/main tzdata 2010j-0ubuntu0.9.10 [680kB]
+Get:2 http://archive.ubuntu.com karmic-updates/main libc-bin 2.10.1-0ubuntu17 [784kB]
+Get:3 http://archive.ubuntu.com karmic-updates/main libc6 2.10.1-0ubuntu17 [4206kB]
+Get:4 http://archive.ubuntu.com karmic-updates/main libgssapi-krb5-2 1.7dfsg~beta3-1ubuntu0.6 [115kB]
+Get:5 http://archive.ubuntu.com karmic-updates/main libkrb5-3 1.7dfsg~beta3-1ubuntu0.6 [354kB]
+Get:6 http://archive.ubuntu.com karmic-updates/main libkrb5support0 1.7dfsg~beta3-1ubuntu0.6 [42.0kB]
+Get:7 http://archive.ubuntu.com karmic-updates/main libk5crypto3 1.7dfsg~beta3-1ubuntu0.6 [111kB]
+Fetched 6292kB in 1s (3992kB/s)     
+Preconfiguring packages ...
+Can't exec "/tmp/tzdata.config.240751": Permission denied at /usr/share/perl/5.10/IPC/Open3.pm line 168.
+open2: exec of /tmp/tzdata.config.240751 configure 2010h-0ubuntu0.9.10 failed at /usr/share/perl5/Debconf/ConfModule.pm line 59
+tzdata failed to preconfigure, with exit status 255
+Can't exec "/tmp/libc6.config.240753": Permission denied at /usr/share/perl/5.10/IPC/Open3.pm line 168.
+open2: exec of /tmp/libc6.config.240753 configure 2.10.1-0ubuntu16 failed at /usr/share/perl5/Debconf/ConfModule.pm line 59
+libc6 failed to preconfigure, with exit status 255
+(Reading database ... 18235 files and directories currently installed.)
+Preparing to replace tzdata 2010h-0ubuntu0.9.10 (using .../tzdata_2010j-0ubuntu0.9.10_all.deb) ...
+Unpacking replacement tzdata ...
+Setting up tzdata (2010j-0ubuntu0.9.10) ...
+
+Current default time zone: 'America/Los_Angeles'
+Local time is now:      Wed Jun 16 12:57:35 PDT 2010.
+Universal Time is now:  Wed Jun 16 19:57:35 UTC 2010.
+Run 'dpkg-reconfigure tzdata' if you wish to change it.
+
+
+(Reading database ... 18238 files and directories currently installed.)
+Preparing to replace libc-bin 2.10.1-0ubuntu16 (using .../libc-bin_2.10.1-0ubuntu17_amd64.deb) ...
+Unpacking replacement libc-bin ...
+Setting up libc-bin (2.10.1-0ubuntu17) ...
+
+(Reading database ... 18238 files and directories currently installed.)
+Preparing to replace libc6 2.10.1-0ubuntu16 (using .../libc6_2.10.1-0ubuntu17_amd64.deb) ...
+Unpacking replacement libc6 ...
+Setting up libc6 (2.10.1-0ubuntu17) ...
+
+Processing triggers for libc-bin ...
+ldconfig deferred processing now taking place
+(Reading database ... 18238 files and directories currently installed.)
+Preparing to replace libgssapi-krb5-2 1.7dfsg~beta3-1ubuntu0.5 (using .../libgssapi-krb5-2_1.7dfsg~beta3-1ubuntu0.6_amd64.deb) ...
+Unpacking replacement libgssapi-krb5-2 ...
+Preparing to replace libkrb5-3 1.7dfsg~beta3-1ubuntu0.5 (using .../libkrb5-3_1.7dfsg~beta3-1ubuntu0.6_amd64.deb) ...
+Unpacking replacement libkrb5-3 ...
+Preparing to replace libkrb5support0 1.7dfsg~beta3-1ubuntu0.5 (using .../libkrb5support0_1.7dfsg~beta3-1ubuntu0.6_amd64.deb) ...
+Unpacking replacement libkrb5support0 ...
+Preparing to replace libk5crypto3 1.7dfsg~beta3-1ubuntu0.5 (using .../libk5crypto3_1.7dfsg~beta3-1ubuntu0.6_amd64.deb) ...
+Unpacking replacement libk5crypto3 ...
+Setting up libkrb5support0 (1.7dfsg~beta3-1ubuntu0.6) ...
+
+Setting up libk5crypto3 (1.7dfsg~beta3-1ubuntu0.6) ...
+
+Setting up libkrb5-3 (1.7dfsg~beta3-1ubuntu0.6) ...
+
+Setting up libgssapi-krb5-2 (1.7dfsg~beta3-1ubuntu0.6) ...
+
+Processing triggers for libc-bin ...
+ldconfig deferred processing now taking place</pre></li>
+
+        <li class="command">apt-get install postfix bsd-mailx</li>
+        <li class="output"><pre>Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following extra packages will be installed:
+  liblockfile1
+Suggested packages:
+  procmail postfix-mysql postfix-pgsql postfix-ldap postfix-pcre resolvconf postfix-cdb mail-reader ufw
+The following NEW packages will be installed:
+  bsd-mailx liblockfile1 postfix
+0 upgraded, 3 newly installed, 0 to remove and 0 not upgraded.
+Need to get 1566kB of archives.
+After this operation, 3949kB of additional disk space will be used.
+Do you want to continue [Y/n]? Y
+Get:1 http://archive.ubuntu.com karmic/main liblockfile1 1.08-3 [19.8kB]
+Get:2 http://archive.ubuntu.com karmic/main postfix 2.6.5-3 [1380kB]
+Get:3 http://archive.ubuntu.com karmic/main bsd-mailx 8.1.2-0.20081101cvs-2ubuntu1 [166kB]
+Fetched 1566kB in 1s (1333kB/s)  
+Preconfiguring packages ...
+Can't exec "/tmp/postfix.config.32431": Permission denied at /usr/share/perl/5.10/IPC/Open3.pm line 168.
+open2: exec of /tmp/postfix.config.32431 configure  failed at /usr/share/perl5/Debconf/ConfModule.pm line 59
+postfix failed to preconfigure, with exit status 255
+Selecting previously deselected package liblockfile1.
+(Reading database ... 18238 files and directories currently installed.)
+Unpacking liblockfile1 (from .../liblockfile1_1.08-3_amd64.deb) ...
+Selecting previously deselected package postfix.
+Unpacking postfix (from .../postfix_2.6.5-3_amd64.deb) ...
+Selecting previously deselected package bsd-mailx.
+Unpacking bsd-mailx (from .../bsd-mailx_8.1.2-0.20081101cvs-2ubuntu1_amd64.deb) ...
+Setting up liblockfile1 (1.08-3) ...
+
+Setting up postfix (2.6.5-3) ...
+Adding group `postfix' (GID 108) ...
+Done.
+Adding system user `postfix' (UID 105) ...
+Adding new user `postfix' (UID 105) with group `postfix' ...
+Not creating home directory `/var/spool/postfix'.
+Creating /etc/postfix/dynamicmaps.cf
+Adding tcp map entry to /etc/postfix/dynamicmaps.cf
+Adding group `postdrop' (GID 109) ...
+Done.
+setting myhostname: mustardamus.com
+setting alias maps
+setting alias database
+changing /etc/mailname to mustardamus.com
+setting myorigin
+setting destinations: mustardamus.com, localhost.com, , localhost
+setting relayhost: 
+setting mynetworks: 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+setting mailbox_size_limit: 0
+setting recipient_delimiter: +
+setting inet_interfaces: all
+/etc/aliases does not exist, creating it.
+WARNING: /etc/aliases exists, but does not have a root alias.
+
+Postfix is now set up with a default configuration.  If you need to make 
+changes, edit
+/etc/postfix/main.cf (and others) as needed.  To view Postfix configuration
+values, see postconf(1).
+
+After modifying main.cf, be sure to run '/etc/init.d/postfix reload'.
+
+Running newaliases
+ * Stopping Postfix Mail Transport Agent postfix
+   ...done.
+ * Starting Postfix Mail Transport Agent postfix
+   ...done.
+
+Setting up bsd-mailx (8.1.2-0.20081101cvs-2ubuntu1) ...
+update-alternatives: using /usr/bin/bsd-mailx to provide /usr/bin/mailx (mailx) in auto mode.
+
+Processing triggers for libc-bin ...
+ldconfig deferred processing now taking place</pre></li>
+
+        <li class="command">cd /etc/postfix/</li>
+        <li class="command">nano virtual</li>
+        
+        <li class="command">cat virtual</li>
+        <li class="output"><pre>contact@mustardamus.com mustardamus@googlemail.com</pre></li>
+        
+        <li class="command">nano main.cf</li>
+        
+        <li class="command">tail -c 87 main.cf</li>
+        <li class="output"><pre>virtual_alias_domains = mustardamus.com
+virtual_alias_maps = hash:/etc/postfix/virtual</pre></li>
+
+        <li class="command">service postfix restart</li>
+        <li class="output"><pre>* Stopping Postfix Mail Transport Agent postfix
+  ...done.
+* Starting Postfix Mail Transport Agent postfix
+  ...done.
+</pre></li>
+      </ul>
+
+      <div id="terminal-bottom"></div>
+    </div>
+  </div>
+</div>
