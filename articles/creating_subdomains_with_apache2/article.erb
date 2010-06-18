@@ -1,0 +1,74 @@
+<% @title = "Forwarding E-Mails with Postfix" %>
+<% @stylesheets = ["terminal"] %>
+<% @javascripts = ["terminal"] %>
+
+<div id="heading">
+  <div class="grid_10">
+    <h1><a href="/articles/creating_subdomains_with_apache2">
+      Creating Subdomains with Apache2
+      <span>On a MediaTemple (ve) Ubuntu Server.</span>
+    </a></h1>
+  </div>
+  <div class="grid_2">
+    <ul id="meta">
+      <li id="meta-date">
+        <span id="meta-date-month">June</span>
+        <span id="meta-date-day">03</span>
+        <span id="meta-date-year">2010</span>
+      </li>
+      
+      <li id="meta-prev-article"><a href="/articles/forwarding_emails_with_postfix">&laquo; Forwarding E-Mails with Postfix </a></li>
+    </ul>
+  </div>
+  <div class="clear"></div>
+</div>
+
+
+<div id="content">
+  <div class="grid_12">
+    <div id="commands">
+      <h3>Commands</h3>
+      
+      <a href="#toggle-output" id="toggleoutput">Hide Output</a>
+    </div>
+    
+    <div id="terminal">
+      <div id="terminal-top">Creating Subdomains with Apache2</div>
+
+      <ul id="terminal-output">
+        <li class="command">cd /etc/apache2/sites-available/</li>
+        <li class="command">nano tumblr</li>
+        
+        <li class="command">cat tumblr</li>
+        <li class="output"><pre>&lt;VirtualHost *:80&gt;
+  ServerName tumblr.mustardamus.com
+  ServerAlias www.tumblr.mustardamus.com
+  DocumentRoot /var/www/mustardamus.com/subdomains/tumblr
+&lt;/VirtualHost&gt;</pre></li>
+
+        <li class="command">cd /var/www/mustardamus.com/</li>
+        <li class="command">mkdir subdomains</li>
+        <li class="command">cd subdomains/</li>
+        <li class="command">mkdir tumblr</li>
+        <li class="command">nano tumblr/index.html</li>
+        
+        <li class="command">cat tumblr/index.html</li>
+        <li class="output"><pre>works!</pre></li>
+        
+        <li class="command">cd /etc/apache2/sites-available/</li>
+        
+        <li class="command">a2ensite tumblr</li>
+        <li class="output"><pre>Enabling site tumblr.
+Run '/etc/init.d/apache2 reload' to activate new configuration!</pre></li>
+
+        <li class="command">service apache2 restart</li>
+        <li class="output"><pre>* Restarting web server apache2
+... waiting    ...done.</pre></li>
+
+        
+      </ul>
+
+      <div id="terminal-bottom"></div>
+    </div>
+  </div>
+</div>
